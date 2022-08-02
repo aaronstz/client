@@ -10,7 +10,7 @@ import {
   NO_FILTER_PETS,
 } from "./actionTypes";
 
-const SERVER = "https://rebirth-app.herokuapp.com";
+const {SERVER} = process.env;
 
 export function loginUser(credentials){
   return async function(dispatch) {
@@ -73,7 +73,7 @@ export function getUsers() {
 export function postMercadoPago(donacion){
   return async function(dispatch){
       try {
-        let data = await axios.post("https://rebirth-app.herokuapp.com/donations", donacion)
+        let data = await axios.post(`${SERVER}/donations`, donacion)
         return dispatch({type : "MERCADO_PAGO", data})
       } catch (error) {
         console.log('error', error)
