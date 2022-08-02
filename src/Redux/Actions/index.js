@@ -12,6 +12,7 @@ import {
 
 const SERVER = "https://rebirth-app.herokuapp.com";
 
+
 export function loginUser(credentials){
   return async function(dispatch) {
     try {
