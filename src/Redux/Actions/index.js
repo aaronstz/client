@@ -28,7 +28,7 @@ import {
   POST_SUPPORT_FORM,
 } from "./actionTypes";
 
-const SERVER = "https://rebirth-app.herokuapp.com/";
+const SERVER = "https://rebirth-app.herokuapp.com";
 
 export function loginUser(credentials) {
   return async function (dispatch) {
