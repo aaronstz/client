@@ -28,7 +28,7 @@ import {
   POST_SUPPORT_FORM,
 } from "./actionTypes";
 
-const SERVER = "http://localhost:3001";
+const SERVER = "https://rebirth-app.herokuapp.com/";
 
 export function loginUser(credentials) {
   return async function (dispatch) {
@@ -228,7 +228,7 @@ export function deleteUser(mail) {
 export function postMercadoPago(donacion) {
   return async function (dispatch) {
     try {
-      let data = await axios.post("http://localhost:3001/donations", donacion);
+      let data = await axios.post("https://rebirth-app.herokuapp.com/donations", donacion);
       return dispatch({ type: "MERCADO_PAGO", data });
     } catch (error) {
       console.log("error", error);
