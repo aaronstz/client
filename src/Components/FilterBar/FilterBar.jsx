@@ -5,10 +5,10 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import {  getLocation,} from "../../Redux/Actions";
+import { getLocation } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import FilterbarSelect from "../FilterBarSelectedButton/FilterBarSelectedButton";
-
+import { useLocation } from "react-router-dom";
 function FiltersBar({
   handleFilterBySex,
   handleFilterBySize,
@@ -16,13 +16,17 @@ function FiltersBar({
   handleOrderByAge,
   handleSearchName,
 }) {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   let [searchName, setSearchName] = useState("");
   let locations = useSelector((state) => state.location);
+  function handleEnter(searchName) {
+    handleSearchName(searchName);
+    setSearchName("");
+  }
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(getLocation());
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <React.Fragment>
@@ -39,7 +43,10 @@ function FiltersBar({
           <Dropdown.Item eventKey={"All"}>All</Dropdown.Item>
           {locations &&
             locations.map((location) => (
-              <Dropdown.Item eventKey={location}  key={Math.random()}> {location}</Dropdown.Item>
+              <Dropdown.Item eventKey={location} key={Math.random()}>
+                {" "}
+                {location}
+              </Dropdown.Item>
             ))}
         </DropdownButton>
 
@@ -62,13 +69,14 @@ function FiltersBar({
             aria-label="Search by name"
             aria-describedby="basic-addon2"
             onChange={(e) => setSearchName(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleEnter(searchName)}
             value={searchName}
           />
           <Button
             className="btn-pink"
             onClick={(e) => {
               handleSearchName(searchName);
-              setSearchName("")
+              setSearchName("");
             }}
           >
             Search
@@ -81,7 +89,7 @@ function FiltersBar({
           }}
           id="dropdown-button-light"
           variant="light"
-          title="SEX"
+          title="GENDER"
           className="ms-2"
         >
           <Dropdown.Item eventKey="All">All</Dropdown.Item>
